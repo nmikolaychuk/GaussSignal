@@ -184,13 +184,13 @@ void CGaussSignalDlg::OnPaint()
 
 		PicDc->SelectObject(&osi_pen);		//выбираем перо
 
-		/*double *mas_s = new double[length];
+		double *mas_s = new double[length];
 		for (int i = 0; i < length; i++)
 		{
 			mas_s[i] = s(i);
 		}
 
-		Mashtab(mas_s, length, &mn, &mx);*/
+		Mashtab(mas_s, length, &mn, &mx);
 
 		//область построения
 		xmin = 0;			//минимальное значение х
@@ -254,37 +254,37 @@ void CGaussSignalDlg::OnPaint()
 		PicDc_Sh->SelectObject(&osi_pen);		//выбираем перо
 
 		///////////////////////////////////////////
-		//double d = energ_noise / 100;
+		double d = energ_noise / 100;
 
-		//double mas_energsignal = 0;
-		//for (int t = 0; t <= length; t++)
-		//{
-		//	mas_energsignal += mas_s[t] * mas_s[t];
-		//}
+		double mas_energsignal = 0;
+		for (int t = 0; t <= length; t++)
+		{
+			mas_energsignal += mas_s[t] * mas_s[t];
+		}
 
-		//double *mas_psi = new double[length];
-		//for (int t = 0; t <= length; t++)
-		//{
-		//	mas_psi[t] = Psi();
-		//}
+		double *mas_psi = new double[length];
+		for (int t = 0; t <= length; t++)
+		{
+			mas_psi[t] = Psi();
+		}
 
-		//double qpsi = 0;
-		//for (int t = 0; t <= length; t++)
-		//{
-		//	qpsi += mas_psi[t] * mas_psi[t];
-		//}
+		double qpsi = 0;
+		for (int t = 0; t <= length; t++)
+		{
+			qpsi += mas_psi[t] * mas_psi[t];
+		}
 
-		//double alpha = sqrt(d * mas_energsignal / qpsi);
+		double alpha = sqrt(d * mas_energsignal / qpsi);
 
-		/////////////////////////////////////////////
+		///////////////////////////////////////////
 
-		//double *mas_shum = new double[length];
-		//for (int i = 0; i <= length; i++)
-		//{
-		//	mas_shum[i] = s(i) + alpha * mas_psi[i];
-		//}
+		double *mas_shum = new double[length];
+		for (int i = 0; i <= length; i++)
+		{
+			mas_shum[i] = s(i) + alpha * mas_psi[i];
+		}
 
-		//Mashtab(mas_shum, length, &mn_s, &mx_s);
+		Mashtab(mas_shum, length, &mn_s, &mx_s);
 
 		//область построения
 		xmin_s = 0;			//минимальное значение х
@@ -349,7 +349,7 @@ void CGaussSignalDlg::OnPaint()
 
 		PicDc3->SelectObject(&osi_pen);		//выбираем перо
 
-		/*int is = -1;
+		int is = -1;
 		cmplx *sp = new cmplx[length + 1];
 		for (int i = 0; i <= length; i++)
 		{
@@ -365,7 +365,7 @@ void CGaussSignalDlg::OnPaint()
 			mas_mod[i] = sqrt((sp[i].real)*(sp[i].real) + (sp[i].image)*(sp[i].image));
 		}
 
-		Mashtab(mas_mod, length, &mn3, &mx3);*/
+		Mashtab(mas_mod, length, &mn3, &mx3);
 
 		//область построения
 		xmin3 = 0;			//минимальное значение х
@@ -478,7 +478,6 @@ void CGaussSignalDlg::OnBnClickedButton1()
 	{
 		mas_s[i] = s(i);
 	}
-
 	PicDc->SelectObject(&graf_pen);
 	PicDc->MoveTo(DOTS(xmin, s(xmin)));
 	for (int i = xmin; i <= xmax; i += 1)
@@ -555,8 +554,6 @@ void CGaussSignalDlg::OnBnClickedGenShum()
 	{
 		mas_shum[i] = mas_s[i] + alpha * mas_psi[i];
 	}
-
-	Mashtab(mas_shum, length, &mn_s, &mx_s);
 
 	PicDc_Sh->MoveTo(DOTS_SH(xmin_s, mas_shum[(int)xmin_s]));
 
@@ -648,8 +645,6 @@ void CGaussSignalDlg::OnBnClickedPpf()
 	{
 		mas_mod[i] = sqrt((sp[i].real)*(sp[i].real) + (sp[i].image)*(sp[i].image));
 	}
-
-	Mashtab(mas_mod, length, &mn3, &mx3);
 
 	PicDc3->MoveTo(DOTS3(xmin3, mas_mod[(int)xmin3]));
 
