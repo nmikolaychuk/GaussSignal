@@ -789,7 +789,7 @@ void CGaussSignalDlg::OnBnClickedClear()
 	double *mas_spectr_null = new double[length + 1];
 	for (int i = 0; i <= length; i++)
 	{
-		mas_spectr_null[i] = mas_null[i].real;
+		mas_spectr_null[i] = sqrt((mas_null[i].real)*(mas_null[i].real)+(mas_null[i].image)*(mas_null[i].image));
 	}
 
 	PicDc3->SelectObject(&grafshum_pen);
