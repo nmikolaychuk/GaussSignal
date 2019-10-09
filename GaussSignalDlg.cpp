@@ -772,15 +772,15 @@ void CGaussSignalDlg::OnBnClickedClear()
 
 	for (int i = 0; i <= length; i++)
 	{
-		if (i > t1 && i < t2)
+		if ((i > t1) && (i < t2))
 		{
 			mas_null[i].real = 0;
 			mas_null[i].image = 0;
 		}
 		else
 		{
-			mas_null[i].real = mas_mod[i];
-			mas_null[i].image = 0;
+			mas_null[i].real = sp[i].real;
+			mas_null[i].image = sp[i].image;
 		}
 	}
 
