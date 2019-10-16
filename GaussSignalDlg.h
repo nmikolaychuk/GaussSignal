@@ -55,7 +55,6 @@ public:
 	afx_msg double Psi();
 	afx_msg double alpha();
 	afx_msg void Mashtab(double arr[], int dim, double *mmin, double *mmax);
-	//void CGaussSignalDlg::fourea(struct cmplx *data, int n, int is);
 
 	//объявление ручек
 	CPen osi_pen;		// ручка для осей
@@ -73,26 +72,15 @@ public:
 	double fi_1;
 	double fi_2;
 	double fi_3;
-	double length;
+	int length;
 	double energ_noise;
 	double percent_of_signal;
+	double nevyazki;
 	
 	afx_msg void OnBnClickedButton1();
-	/*afx_msg void OnEnChangeA1();
-	afx_msg void OnEnChangeA2();
-	afx_msg void OnEnChangeA3();
-	afx_msg void OnEnChangeF1();
-	afx_msg void OnEnChangeF2();
-	afx_msg void OnEnChangeF3();
-	afx_msg void OnEnChangeFi1();
-	afx_msg void OnEnChangeFi2();
-	afx_msg void OnEnChangeFi3();*/
 	afx_msg void OnBnClickedExit();
-	//afx_msg void OnEnChangeLenSign();
-	//afx_msg void OnEnChangeEnergNoise();
 	afx_msg void OnBnClickedGenShum();
 	afx_msg void OnBnClickedPpf();
-	//afx_msg void OnEnChangePercent();
 	afx_msg void OnBnClickedClear();
 
 	typedef struct cmplx { float real; float image; } Cmplx;
@@ -151,6 +139,5 @@ public:
 			data[i].real /= (float)n;
 			data[i].image /= (float)n;
 			}
-
 	}
 };

@@ -41,6 +41,7 @@ CGaussSignalDlg::CGaussSignalDlg(CWnd* pParent /*=nullptr*/)
 	, length(256)
 	, energ_noise(10)
 	, percent_of_signal(10)
+	, nevyazki(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -70,28 +71,17 @@ void CGaussSignalDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_LEN_SIGN, length);
 	DDX_Text(pDX, IDC_ENERG_NOISE, energ_noise);
 	DDX_Text(pDX, IDC_PERCENT, percent_of_signal);
+	DDX_Text(pDX, IDC_EDIT1, nevyazki);
 }
 
 BEGIN_MESSAGE_MAP(CGaussSignalDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CGaussSignalDlg::OnBnClickedButton1)
-	//ON_EN_CHANGE(IDC_A1, &CGaussSignalDlg::OnEnChangeA1)
-	//ON_EN_CHANGE(IDC_A2, &CGaussSignalDlg::OnEnChangeA2)
-	//ON_EN_CHANGE(IDC_A3, &CGaussSignalDlg::OnEnChangeA3)
-	//ON_EN_CHANGE(IDC_F1, &CGaussSignalDlg::OnEnChangeF1)
-	//ON_EN_CHANGE(IDC_F2, &CGaussSignalDlg::OnEnChangeF2)
-	//ON_EN_CHANGE(IDC_F3, &CGaussSignalDlg::OnEnChangeF3)
-	//ON_EN_CHANGE(IDC_FI1, &CGaussSignalDlg::OnEnChangeFi1)
-	//ON_EN_CHANGE(IDC_FI2, &CGaussSignalDlg::OnEnChangeFi2)
-	//ON_EN_CHANGE(IDC_FI3, &CGaussSignalDlg::OnEnChangeFi3)
 	ON_BN_CLICKED(IDC_EXIT, &CGaussSignalDlg::OnBnClickedExit)
-	//ON_EN_CHANGE(IDC_LEN_SIGN, &CGaussSignalDlg::OnEnChangeLenSign)
-	//ON_EN_CHANGE(IDC_ENERG_NOISE, &CGaussSignalDlg::OnEnChangeEnergNoise)
 	ON_BN_CLICKED(IDC_GEN_SHUM, &CGaussSignalDlg::OnBnClickedGenShum)
 	ON_BN_CLICKED(IDC_PPF, &CGaussSignalDlg::OnBnClickedPpf)
 	ON_BN_CLICKED(IDC_CLEAR, &CGaussSignalDlg::OnBnClickedClear)
-	//ON_EN_CHANGE(IDC_PERCENT, &CGaussSignalDlg::OnEnChangePercent)
 END_MESSAGE_MAP()
 
 
@@ -819,7 +809,15 @@ void CGaussSignalDlg::OnBnClickedClear()
 	{
 		PicDc->LineTo(DOTS(i, mas_modul_null[i]));
 	}
-	/////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////// невязки
+	
+	double nev = 0;
+	for (int i = 0; i <= length; i++)
+	{
+		nev += (mas_s[i] - mas_modul_null[i]) * (mas_s[i] - mas_modul_null[i]);
+	}
+	nevyazki = nev;
+	UpdateData(FALSE);
 }
 
 void CGaussSignalDlg::OnBnClickedExit()
